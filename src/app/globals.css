@@ -1,1 +1,19 @@
 @import "tailwindcss";
+
+@theme inline {
+  /* Fonts */
+  --font-PlusJakartaSans: var(--font-plus-jakarta);
+  --font-PoetsenOne: var(--font-poetsen-one);
+
+  /* Colors */
+  --color-nav_txt_cof: #723e29;
+  --color-nav_txt_fee: #311103;
+  --color-primary: #371406;
+  --color-cart-count: #16a34a;
+  --color-bg-primary: #fcf9f8;
+}
+
+body {
+  background-color: var(--color-bg-primary);
+  font-family: var(--font-plus-jakarta);
+}
