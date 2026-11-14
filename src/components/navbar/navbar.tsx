@@ -49,7 +49,7 @@ const Navbar = () => {
             />
             <SearchIcon />
           </div>
-          <div className="relative z-0">
+          <div className="relative z-0 cursor-pointer">
             <CartNav />
             <span className="bg-cart-count absolute -top-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full text-xs text-white">
               0

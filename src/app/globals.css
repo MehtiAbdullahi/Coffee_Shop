@@ -17,3 +17,8 @@ body {
   background-color: var(--color-bg-primary);
   font-family: var(--font-plus-jakarta);
 }
+
+::selection {
+  background-color: var(--color-primary);
+  color: white;
+}
