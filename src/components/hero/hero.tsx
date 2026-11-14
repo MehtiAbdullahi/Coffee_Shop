@@ -1,5 +1,5 @@
 import React from "react";
-import Feature from "../feature-section/feature";
+import Feature from "../feature-section/Feature";
 
 const Hero = () => {
   return (
