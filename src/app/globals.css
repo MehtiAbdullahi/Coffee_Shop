@@ -12,6 +12,8 @@
   --color-cart-count: #16a34a;
   --color-bg-primary: #fcf9f8;
   --color-bg-secondry: #5e3528;
+  --color-border: #e0dfde;
+  --color-products-bg: #fefdff;
 }
 
 body {
