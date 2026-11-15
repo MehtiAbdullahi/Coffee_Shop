@@ -4,6 +4,7 @@ import CoffeeBeans from "../components/coffee-beans/CoffeeBeans";
 import FavouriteCoffee from "@/components/favourite-coffee/FavoriteCoffee";
 import ProductShop from "@/components/product-shop/ProductShop";
 import Client from "@/components/client/Client";
+import Gallery from "@/components/gallery/Gallery";
 
 const HeroPage = () => {
   return (
@@ -14,6 +15,7 @@ const HeroPage = () => {
         <FavouriteCoffee />
         <ProductShop />
         <Client />
+        <Gallery />
       </main>
     </>
   );

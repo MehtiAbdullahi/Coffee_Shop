@@ -15,6 +15,18 @@
   --color-border: #e0dfde;
   --color-products-bg: #fefdff;
   --color-client-overlay: #311103;
+
+  --animate-marquee-3d: marquee-3d var(--marquee-3d-duration, 20s) linear
+    infinite;
+
+  @keyframes marquee-3d {
+    from {
+      transform: translateY(calc(100% / 6));
+    }
+    to {
+      transform: translateY(calc(100% / -6));
+    }
+  }
 }
 
 body {
