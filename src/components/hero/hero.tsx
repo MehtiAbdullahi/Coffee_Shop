@@ -4,7 +4,7 @@ import Feature from "../feature-section/Feature";
 const Hero = () => {
   return (
     <>
-      <section className="flex w-full items-center bg-[url('/images/backgrounds/hero-bg.webp'),url('/images/backgrounds/hero-bg-pattern.webp')] bg-size-[cover,auto] bg-position-[center,right] bg-no-repeat max-sm:mt-12 sm:min-h-120 xl:min-h-200">
+      <section className="relative z-0 flex w-full items-center bg-[url('/images/backgrounds/hero-bg.webp'),url('/images/backgrounds/hero-bg-pattern.webp')] bg-size-[cover,auto] bg-position-[center,right] bg-no-repeat max-sm:mt-12 sm:min-h-120 xl:min-h-200">
         <div className="z-10 container mx-auto flex h-full items-center justify-between max-sm:flex-col max-sm:px-12 lg:px-6">
           <div className="max-lg-[] basis-1/2 max-lg:pl-6 max-sm:pl-0 max-sm:text-center">
             <h1 className="text-primary text-3xl leading-10 font-bold max-[426px]:text-[17px] max-[426px]:leading-6 lg:text-4xl lg:leading-14 xl:text-[75px] xl:leading-24">
