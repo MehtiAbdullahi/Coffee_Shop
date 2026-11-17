@@ -17,6 +17,9 @@
   --color-products-bg: #fefdff;
   --color-client-overlay: #311103;
 
+  --color-linear-first: #b5b5b56e;
+  --color-linear-second: #b5b5b569;
+
   --animate-marquee-3d: marquee-3d var(--marquee-3d-duration, 20s) linear
     infinite;
 
@@ -38,4 +41,37 @@ body {
 ::selection {
   background-color: var(--color-primary);
   color: white;
+}
+
+.coffee-logo {
+  background: linear-gradient(
+    90deg,
+    #5c2e14,
+    #b87333,
+    #ceae82,
+    #8b4513,
+    #d49a5a,
+    #5c2e14
+  );
+
+  background-size: 300% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  animation: coffeeFlow 6s ease-in-out infinite;
+}
+
+@keyframes coffeeFlow {
+  0% {
+    background-position: 0% center;
+  }
+
+  50% {
+    background-position: 100% center;
+  }
+
+  100% {
+    background-position: 0% center;
+  }
 }
