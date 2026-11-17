@@ -4,6 +4,7 @@ import Feature from "../feature-section/Feature";
 import { AnimatedCursor, Cursor, CursorFollow } from "../ui/animated-cursor";
 import TechText from "../ui/TechText";
 import { motion } from "framer-motion";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 const Hero = () => {
   const [fontSize, setFontSize] = useState(200);
@@ -26,6 +27,8 @@ const Hero = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  const isDesktop = useMediaQuery("(min-width: 769px)", true);
+
   return (
     <>
       <section className="relative z-0 flex w-full items-center bg-[url('/images/backgrounds/hero-bg.webp'),url('/images/backgrounds/hero-bg-pattern.webp')] bg-size-[cover,auto] bg-position-[center,right] bg-no-repeat max-sm:mt-12 sm:min-h-120 xl:min-h-200">
@@ -41,7 +44,7 @@ const Hero = () => {
                 dashGap={2}
                 specks={0}
                 intro="type"
-                introDuration={1}
+                introDuration={2}
                 clickKick
                 guides={false}
                 fontFamily=""
@@ -56,7 +59,7 @@ const Hero = () => {
                 selection
                 labels={false}
                 color="#371406"
-                align={window.innerWidth > 768 ? "left" : "center"}
+                align={isDesktop ? "left" : "center"}
                 draggable
                 sweep
               />
@@ -68,7 +71,7 @@ const Hero = () => {
               home
             </p>
             <div className="flex max-md:justify-center">
-              <AnimatedCursor className="bg-primary cursor-pointer rounded-xl px-8 py-4 font-semibold text-white transition hover:shadow-primary/30 hover:shadow-xl hover:scale-105 max-[426px]:px-6 max-[426px]:py-2">
+              <AnimatedCursor className="bg-primary hover:shadow-primary/30 cursor-pointer rounded-xl px-8 py-4 font-semibold text-white transition hover:scale-105 hover:shadow-xl max-[426px]:px-6 max-[426px]:py-2">
                 Shop Now
                 <Cursor className="size-0 rounded-full bg-white" />
                 <CursorFollow
