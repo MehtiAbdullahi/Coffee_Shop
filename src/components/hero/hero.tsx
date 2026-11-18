@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Feature from "../feature-section/Feature";
+import Feature from "@/components/feature-section/Feature";
 import { AnimatedCursor, Cursor, CursorFollow } from "../ui/animated-cursor";
 import TechText from "../ui/TechText";
 import { motion } from "framer-motion";
@@ -27,7 +27,7 @@ const Hero = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const isDesktop = useMediaQuery("(min-width: 769px)", true);
+  const isDesktop = useMediaQuery("(min-width: 640px)", true);
 
   return (
     <>
@@ -71,20 +71,43 @@ const Hero = () => {
               home
             </p>
             <div className="flex max-md:justify-center">
-              <AnimatedCursor className="bg-primary hover:shadow-primary/30 cursor-pointer rounded-xl px-8 py-4 font-semibold text-white transition hover:scale-105 hover:shadow-xl max-[426px]:px-6 max-[426px]:py-2">
-                Shop Now
-                <Cursor className="size-0 rounded-full bg-white" />
-                <CursorFollow
-                  align="center"
-                  className="size-32 rounded-full bg-white/50 blur-2xl [--cursor-follow-duration:900ms]"
-                />
-              </AnimatedCursor>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.25, duration: 0.5 }}
+                className="mt-8 md:mt-10"
+              >
+                <button className="group bg-primary md:hover:shadow-primary/30 relative inline-flex cursor-pointer items-center gap-2 overflow-hidden rounded-2xl px-6 py-3 font-semibold text-white transition-all duration-300 active:scale-[0.98] sm:px-8 sm:py-4 md:hover:shadow-xl">
+                  <span className="relative z-10 text-sm md:text-xl">
+                    Shop Now
+                  </span>
+
+                  {/* Arrow */}
+                  <svg
+                    className="relative z-10 h-5 w-5 transition-transform duration-300 md:group-hover:translate-x-1"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M17 8l4 4m0 0l-4 4m4-4H3"
+                    />
+                  </svg>
+
+                  {/* Hover shine effect */}
+                  <span className="absolute inset-0 -translate-x-full bg-linear-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+                </button>
+              </motion.div>
             </div>
           </div>
           <div className="basis-[60%] max-sm:mt-14 lg:basis-[45%]">
             <motion.img
               className="h-auto w-full"
-              src="/images/backgrounds/cup-coffee.webp" // مسیر عکس خودت رو بذار
+              src="/images/backgrounds/cup-coffee.webp"
               alt="coffee-cup"
               initial={{ x: 150, opacity: 0 }}
               whileInView={{ x: 0, opacity: 1 }}
