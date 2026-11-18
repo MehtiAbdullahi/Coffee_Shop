@@ -186,7 +186,7 @@ const Footer = () => {
     window.scrollTo({ top: 0, behavior: reduced ? "auto" : "smooth" });
 
   return (
-    <footer className="container mx-auto mt-28 px-6 pb-6">
+    <footer className="container mx-auto mt-28 px-6 pb-6" id="contact">
       <Newsletter />
 
       {/* ستون‌ها */}

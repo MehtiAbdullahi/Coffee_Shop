@@ -75,3 +75,6 @@ body {
     background-position: 0% center;
   }
 }
+html {
+  @apply scroll-smooth;
+}

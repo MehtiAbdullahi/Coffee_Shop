@@ -105,6 +105,7 @@ const ShopSection = () => {
     // reducedMotion="user": برای کاربرانی که «کاهش حرکت» را فعال کرده‌اند، انیمیشن‌های حرکتی خاموش می‌شوند
     <MotionConfig reducedMotion="user">
       <section
+        id="shop"
         aria-labelledby="shop-title"
         className="relative overflow-hidden py-16 sm:py-20 lg:py-28"
       >

@@ -8,7 +8,6 @@ import SearchIcon from "@/assets/icons/search.svg";
 import { LuMenu } from "react-icons/lu";
 import { LuX } from "react-icons/lu";
 import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
 import { MotionHighlight, MotionHighlightItem } from "../ui/motion-highlight";
 import { cn } from "cn";
 
@@ -18,28 +17,43 @@ interface navLinksTypes {
 }
 
 const navLinks: navLinksTypes[] = [
-  { title: "Home", href: "/" },
-  { title: "Shop", href: "/shop" },
-  { title: "Blog", href: "/blog" },
-  { title: "About", href: "/about" },
-  { title: "Contact", href: "/contact" },
+  { title: "Home", href: "#home" },
+  { title: "Shop", href: "#shop" },
+  { title: "Blog", href: "#blog" },
+  { title: "About", href: "#about" },
+  { title: "Contact", href: "#contact" },
 ];
 
 const Navbar = () => {
   const [showMbMenu, setShowMbMenu] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [hash, setHash] = useState("");
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
 
+    handleScroll(); // بررسی وضعیت اسکرول هنگام لود صفحه
+
     window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const pathname = usePathname();
+  useEffect(() => {
+    const updateHash = () => {
+      setHash(window.location.hash || "#home");
+    };
+
+    updateHash();
+
+    window.addEventListener("hashchange", updateHash);
+
+    return () => {
+      window.removeEventListener("hashchange", updateHash);
+    };
+  }, []);
 
   return (
     <nav className="relative container mx-auto h-25 px-3 max-lg:px-0 max-md:px-3">
@@ -81,22 +95,34 @@ const Navbar = () => {
                   <LuX size={28} onClick={() => setShowMbMenu(!showMbMenu)} />
                 </div>
 
-                {navLinks.map(({ href, title }) => (
-                  <MotionHighlightItem key={href} value={href} asChild>
-                    <li
-                      className={`text-primary max-md:hover:bg-primary cursor-pointer p-1 text-center font-semibold transition duration-200 max-md:py-6 max-md:hover:text-white ${pathname === href && "md:border-b-primary max-md:bg-primary max-md:text-white md:border-b-2"}`}
-                    >
-                      <Link className="lg:p-2" href={href}>
-                        {title}
+                {navLinks.map(({ href, title }) => {
+                  const isActive = hash === href;
+
+                  return (
+                    <MotionHighlightItem key={href} value={href} asChild>
+                      <Link
+                        className="flex-1 cursor-pointer"
+                        href={href}
+                        onClick={() => setHash(href)}
+                      >
+                        <li
+                          className={cn(
+                            "text-primary max-md:hover:bg-primary py-2 text-center font-semibold transition duration-200 max-md:py-6 max-md:hover:text-white",
+                            isActive &&
+                              "md:border-b-primary max-md:bg-primary max-md:text-white md:border-b-2",
+                          )}
+                        >
+                          {title}
+                        </li>
                       </Link>
-                    </li>
-                  </MotionHighlightItem>
-                ))}
+                    </MotionHighlightItem>
+                  );
+                })}
               </ul>
             </MotionHighlight>
           </ul>
         </div>
-        <div className="flex items-center gap-2 lg:gap-5">
+        <div className="flex items-center gap-3 lg:gap-5">
           <div
             className={cn(
               "border-border hidden w-full max-w-96 min-w-0 items-center justify-between rounded-3xl border bg-white px-3.5 py-1 transition duration-150 hover:border-black/50 md:flex",

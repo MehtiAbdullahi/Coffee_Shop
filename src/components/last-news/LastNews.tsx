@@ -167,7 +167,7 @@ const LastNews = () => {
   const headingWords = "Latest news & blog".split(" ");
 
   return (
-    <section className="relative overflow-hidden bg-size-[cover,auto] bg-left bg-no-repeat py-20 sm:py-24 lg:bg-[url('/images/backgrounds/hero-bg.webp')] xl:py-32">
+    <section id="blog" className="relative overflow-hidden bg-size-[cover,auto] bg-left bg-no-repeat py-20 sm:py-24 lg:bg-[url('/images/backgrounds/hero-bg.webp')] xl:py-32">
       {/* الگوی فنجان با حرکت شناور */}
       <motion.img
         src="/images/backgrounds/coffee-cup-pattern.webp"
@@ -175,7 +175,7 @@ const LastNews = () => {
         aria-hidden
         animate={reduced ? undefined : { y: [0, -14, 0], rotate: [0, 3, 0] }}
         transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-        className="pointer-events-none absolute top-0 w-32 opacity-60 sm:w-40 md:top-30 md:w-48 md:opacity-100 max-md:-left-6"
+        className="pointer-events-none absolute top-0 w-32 opacity-60 max-md:-left-6 sm:w-40 md:top-30 md:w-48 md:opacity-100"
       />
 
       <div className="relative z-10 container mx-auto flex flex-col items-center gap-12 px-6 sm:gap-16">

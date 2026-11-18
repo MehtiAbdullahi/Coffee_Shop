@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 const CoffeeBeans = () => {
   return (
-    <section className="my-36 flex h-150 w-full items-center md:my-12 2xl:h-200 2xl:bg-[url('/images/backgrounds/coffee-bean-photo.webp')] 2xl:bg-right 2xl:bg-no-repeat">
+    <section id="about" className="my-36 flex h-150 w-full items-center md:my-12 2xl:h-200 2xl:bg-[url('/images/backgrounds/coffee-bean-photo.webp')] 2xl:bg-right 2xl:bg-no-repeat">
       <div className="container mx-auto flex items-center justify-between px-6 max-2xl:px-0 max-md:flex-col max-md:gap-12 max-md:px-5">
         <motion.div
           initial={{ opacity: 0, x: -40 }}

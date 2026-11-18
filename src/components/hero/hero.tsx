@@ -31,7 +31,7 @@ const Hero = () => {
 
   return (
     <>
-      <section className="relative z-0 flex w-full items-center bg-[url('/images/backgrounds/hero-bg.webp'),url('/images/backgrounds/hero-bg-pattern.webp')] bg-size-[cover,auto] bg-position-[center,right] bg-no-repeat max-sm:mt-12 sm:min-h-120 xl:min-h-200">
+      <section id="home" className="relative z-0 flex w-full items-center bg-[url('/images/backgrounds/hero-bg.webp'),url('/images/backgrounds/hero-bg-pattern.webp')] bg-size-[cover,auto] bg-position-[center,right] bg-no-repeat max-sm:mt-12 sm:min-h-120 xl:min-h-200">
         <div className="z-10 container mx-auto flex h-full items-center justify-between max-sm:flex-col max-sm:px-12 lg:px-6">
           <div className="basis-1/2 max-lg:pl-6 max-sm:pl-0 max-sm:text-center">
             <div className="relative flex h-40 w-full max-md:justify-center sm:-ml-4 lg:-ml-8 lg:h-50 xl:h-70">
