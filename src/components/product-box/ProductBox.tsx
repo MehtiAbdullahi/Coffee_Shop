@@ -26,7 +26,7 @@ const ProductBox = ({
         <Card3DBody className="group/card bg-card text-card-foreground flex h-full w-full max-w-sm flex-col transform-3d">
           {/* ================= عکس ================= */}
           {/* این لایه فقط وقتی موس روی پنل پایین است، عقب می‌رود */}
-          <div className="group/img relative w-full shrink-0 transition-transform duration-300 ease-out transform-3d [@media(hover:hover)]:group-has-[[data-panel]:hover]/card:translate-y-2 [@media(hover:hover)]:group-has-[[data-panel]:hover]/card:-translate-z-10 [@media(hover:hover)]:group-has-[[data-panel]:hover]/card:brightness-90">
+          <div className="group/img relative w-full shrink-0 transition-transform duration-300 ease-out transform-3d hover:group-has-[[data-panel]:hover]/card:translate-y-2 hover:group-has-[[data-panel]:hover]/card:-translate-z-10 hover:group-has-[[data-panel]:hover]/card:brightness-90">
             {/* با هاور روی عکس: کمی جلو می‌آید و داخل قاب زوم می‌شود */}
             <div className="overflow-hidden rounded-t-xl shadow-lg transition-all duration-300 ease-out group-hover/img:translate-z-8 group-hover/img:scale-[1.03] group-hover/img:shadow-2xl">
               <img
