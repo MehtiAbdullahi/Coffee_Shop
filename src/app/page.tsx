@@ -1,11 +1,12 @@
 import React from "react";
-import Hero from "@/components/hero/Hero";
-import CoffeeBeans from "../components/coffee-beans/CoffeeBeans";
-import FavouriteCoffee from "@/components/favorite-coffee/FavoriteCoffee";
-import ProductShop from "@/components/product-shop/ProductShop";
-import Client from "@/components/client/Client";
-import Gallery from "@/components/gallery/Gallery";
-import LastNews from "@/components/last-news/LastNews";
+
+import CoffeeBeans from "../components/landing-page/coffee-beans/CoffeeBeans";
+import FavouriteCoffee from "@/components/landing-page/favorite-coffee/FavoriteCoffee";
+import Client from "@/components/landing-page/client/Client";
+import LastNews from "@/components/landing-page/last-news/LastNews";
+import Hero from "@/components/landing-page/hero/Hero";
+import Gallery from "@/components/landing-page/gallery/Gallery";
+import ProductShop from "@/components/landing-page/product-shop/ProductShop";
 
 const HeroPage = () => {
   return (

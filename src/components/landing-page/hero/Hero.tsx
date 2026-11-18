@@ -1,10 +1,9 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Feature from "@/components/feature-section/Feature";
-import { AnimatedCursor, Cursor, CursorFollow } from "../ui/animated-cursor";
-import TechText from "../ui/TechText";
+import Feature from "@/components/landing-page/feature-section/Feature";
 import { motion } from "framer-motion";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
+import TechText from "@/components/ui/TechText";
 
 const Hero = () => {
   const [fontSize, setFontSize] = useState(200);

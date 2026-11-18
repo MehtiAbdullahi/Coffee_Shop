@@ -2,8 +2,9 @@
 
 import React from "react";
 import { motion, MotionConfig, type Variants } from "framer-motion";
+import ProductBox from "@/components/product-box/ProductBox";
 
-import ProductBox from "../product-box/ProductBox";
+
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -100,7 +101,7 @@ const gridItem: Variants = {
   },
 };
 
-const ShopSection = () => {
+const ProductShop = () => {
   return (
     // reducedMotion="user": برای کاربرانی که «کاهش حرکت» را فعال کرده‌اند، انیمیشن‌های حرکتی خاموش می‌شوند
     <MotionConfig reducedMotion="user">
@@ -230,4 +231,4 @@ const ShopSection = () => {
   );
 };
 
-export default ShopSection;
+export default ProductShop;

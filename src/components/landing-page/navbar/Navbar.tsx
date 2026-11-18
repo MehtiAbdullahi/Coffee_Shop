@@ -8,8 +8,8 @@ import SearchIcon from "@/assets/icons/search.svg";
 import { LuMenu } from "react-icons/lu";
 import { LuX } from "react-icons/lu";
 import { useEffect, useState } from "react";
-import { MotionHighlight, MotionHighlightItem } from "../ui/motion-highlight";
 import { cn } from "cn";
+import { MotionHighlight, MotionHighlightItem } from "@/components/ui/motion-highlight";
 
 interface navLinksTypes {
   title: string;

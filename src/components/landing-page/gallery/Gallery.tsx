@@ -4,8 +4,8 @@ import React, { useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
-import { ArrowRight, Camera, Expand, Images } from "lucide-react";
-import { Marquee3D } from "../ui/marquee-3d";
+import { Camera, Expand, Images } from "lucide-react";
+import { Marquee3D } from "../../ui/marquee-3d";
 
 const images = [
   "/images/backgrounds/coffee2.webp",
