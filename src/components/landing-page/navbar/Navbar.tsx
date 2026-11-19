@@ -1,6 +1,8 @@
 "use client";
 import Link from "next/link";
 
+import { motion, useReducedMotion } from "motion/react";
+
 // icons
 import CartNav from "@/assets/icons/cart.svg";
 import NavLogo from "@/assets/icons/nav-logo.svg";
@@ -33,6 +35,9 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [hash, setHash] = useState("");
 
+  const EASE = [0.22, 1, 0.36, 1] as const;
+  const reduced = useReducedMotion();
+
   const pathName = usePathname();
 
   useEffect(() => {
@@ -63,7 +68,11 @@ const Navbar = () => {
 
   return (
     <nav className="relative container mx-auto h-25 px-3 max-lg:px-0 max-md:px-3">
-      <div
+      <motion.div
+        initial={reduced ? false : { opacity: 0, y: -20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.5 }}
+        transition={{ duration: 1, ease: EASE }}
         className={cn(
           "mt-5 flex items-center justify-between px-5 py-2 [&>div]:flex [&>div]:items-center",
           scrolled &&
@@ -170,7 +179,7 @@ const Navbar = () => {
             <LuMenu size="24px" />
           </div>
         </div>
-      </div>
+      </motion.div>
     </nav>
   );
 };
