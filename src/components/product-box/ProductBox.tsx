@@ -67,7 +67,7 @@ const ProductBox = ({
               className="group/panel flex flex-1 flex-col transform-3d"
             >
               {/* لایه‌ی داخلی با هاور بالا و جلو می‌آید */}
-              <div className="bg-products-bg border-border flex flex-1 flex-col rounded-b-xl border-2 p-2 transition-all duration-300 ease-out transform-3d group-hover/panel:-translate-y-3 group-hover/panel:translate-z-14 group-hover/panel:rounded-xl group-hover/panel:shadow-2xl min-[530px]:px-5 sm:py-2">
+              <div className="bg-products-bg border-border flex flex-1 flex-col rounded-b-xl border-2 p-2 transition-all duration-300 ease-out transform-3d group-hover/panel:-translate-y-3 group-hover/panel:translate-z-14 group-hover/panel:rounded-xl group-hover/panel:shadow-2xl min-[530px]:px-5 sm:py-4">
                 <div className="flex flex-wrap items-center justify-between gap-2 sm:py-3">
                   <span className="text-sm font-bold min-[530px]:text-xl">
                     {title}
@@ -77,7 +77,7 @@ const ProductBox = ({
                   </span>
                 </div>
 
-                <div className="mt-auto flex flex-wrap items-center justify-center gap-4 py-3 max-[530px]:flex-col-reverse min-[530px]:justify-between sm:gap-2">
+                <div className="flex flex-wrap items-center justify-between gap-2 pt-4 max-[440px]:justify-center sm:pt-6">
                   <button
                     type="button"
                     className="bg-primary cursor-pointer rounded-sm p-2 text-[12px] font-semibold text-nowrap text-white transition hover:brightness-110 active:scale-95 sm:text-sm md:px-4 md:py-2"
