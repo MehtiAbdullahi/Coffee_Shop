@@ -3,8 +3,7 @@
 import React from "react";
 import { motion, MotionConfig, type Variants } from "framer-motion";
 import ProductBox from "@/components/product-box/ProductBox";
-
-
+import Link from "next/link";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -202,9 +201,12 @@ const ProductShop = () => {
             className="mt-12 flex justify-center px-4 sm:mt-16"
           >
             <button className="group bg-primary md:hover:shadow-primary/30 relative inline-flex cursor-pointer items-center gap-2 overflow-hidden rounded-2xl px-6 py-3 font-semibold text-white transition-all duration-300 active:scale-[0.98] sm:px-8 sm:py-4 md:hover:shadow-xl">
-              <span className="relative z-10 text-sm md:text-xl">
+              <Link
+                className="relative z-10 text-sm md:text-xl"
+                href="/shop"
+              >
                 View All Product
-              </span>
+              </Link>
 
               {/* Arrow */}
               <svg
