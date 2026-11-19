@@ -9,7 +9,11 @@ import { LuMenu } from "react-icons/lu";
 import { LuX } from "react-icons/lu";
 import { useEffect, useState } from "react";
 import { cn } from "cn";
-import { MotionHighlight, MotionHighlightItem } from "@/components/ui/motion-highlight";
+import {
+  MotionHighlight,
+  MotionHighlightItem,
+} from "@/components/ui/motion-highlight";
+import { usePathname } from "next/navigation";
 
 interface navLinksTypes {
   title: string;
@@ -17,17 +21,19 @@ interface navLinksTypes {
 }
 
 const navLinks: navLinksTypes[] = [
-  { title: "Home", href: "#home" },
-  { title: "Shop", href: "#shop" },
-  { title: "Blog", href: "#blog" },
-  { title: "About", href: "#about" },
-  { title: "Contact", href: "#contact" },
+  { title: "Home", href: "/#home" },
+  { title: "Shop", href: "/#shop" },
+  { title: "Blog", href: "/#blog" },
+  { title: "About", href: "/#about" },
+  { title: "Contact", href: "/#contact" },
 ];
 
 const Navbar = () => {
   const [showMbMenu, setShowMbMenu] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [hash, setHash] = useState("");
+
+  const pathName = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -43,7 +49,7 @@ const Navbar = () => {
 
   useEffect(() => {
     const updateHash = () => {
-      setHash(window.location.hash || "#home");
+      setHash(window.location.hash);
     };
 
     updateHash();
@@ -96,7 +102,11 @@ const Navbar = () => {
                 </div>
 
                 {navLinks.map(({ href, title }) => {
-                  const isActive = hash === href;
+                  const isActive = hash === href.replace("/", "");
+                  console.log("hash", hash);
+                  console.log("href", href);
+                  console.log("isActive", isActive);
+                  console.log(pathName === href.replace("#", ""));
 
                   return (
                     <MotionHighlightItem key={href} value={href} asChild>
@@ -108,8 +118,11 @@ const Navbar = () => {
                         <li
                           className={cn(
                             "text-primary max-md:hover:bg-primary py-2 text-center font-semibold transition duration-200 max-md:py-6 max-md:hover:text-white",
-                            isActive &&
-                              "md:border-b-primary max-md:bg-primary max-md:text-white md:border-b-2",
+                            isActive
+                              ? "md:border-b-primary max-md:bg-primary max-md:text-white md:border-b-2"
+                              : pathName === href.replace("#", "")
+                                ? "md:border-b-primary max-md:bg-primary max-md:text-white md:border-b-2"
+                                : "",
                           )}
                         >
                           {title}
