@@ -5,6 +5,7 @@ import { motion, useReducedMotion, Variants } from "framer-motion";
 // Icons
 import Trash from "@/assets/icons/SVGRepo_iconCarrier.svg";
 import { NumberCounter } from "@/components/number-counter/NumberCounter";
+import Link from "next/link";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -126,9 +127,9 @@ const CartPage = () => {
           </div>
           <div className="flex flex-wrap justify-between gap-4 lg:mt-8">
             <button className="bg-primary md:hover:shadow-primary/30 relative inline-flex scale-100 cursor-pointer items-center gap-2 overflow-hidden rounded-md px-8 py-3 font-semibold text-white transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-100 max-lg:mx-auto">
-              <span className="md:text-md relative z-10 text-sm">
+              <Link href="/payment" className="md:text-md relative z-10 text-sm">
                 Continue Shopping
-              </span>
+              </Link>
               {/* Hover shine effect */}
               <span className="absolute inset-0 -translate-x-full bg-linear-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
             </button>
