@@ -108,7 +108,6 @@ const Gallery = () => {
             images={images}
             duration={20}
             reverse
-            pauseOnHover
           />
           {/* محو شدن بالا و پایین */}
           <div
@@ -122,7 +121,7 @@ const Gallery = () => {
         </motion.div>
 
         {/* ------------------- Mobile / Tablet: Bento grid ------------------- */}
-        <div className="my-12 grid grid-flow-dense auto-rows-[7rem] grid-cols-2 gap-3 min-[480px]:auto-rows-[9rem] md:auto-rows-[11rem] md:grid-cols-3 md:gap-4 lg:hidden">
+        <div className="my-12 grid grid-flow-dense auto-rows-28 grid-cols-2 gap-3 min-[480px]:auto-rows-36 md:auto-rows-44 md:grid-cols-3 md:gap-4 lg:hidden">
           {images.map((src, index) => (
             <motion.button
               key={src}
@@ -172,8 +171,8 @@ const Gallery = () => {
           className="flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4"
         >
           <motion.button
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.25, duration: 0.5 }}
             className="bg-primary group relative inline-flex cursor-pointer items-center gap-2 overflow-hidden rounded-xl px-8 py-4 font-semibold text-white shadow-lg shadow-black/10 max-[426px]:px-6 max-[426px]:py-3"
@@ -204,8 +203,10 @@ const Gallery = () => {
           <motion.button
             type="button"
             onClick={() => setLightboxIndex(0)}
-            whileHover={{ y: -2 }}
-            whileTap={{ scale: 0.97 }}
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.25, duration: 0.5 }}
             className="border-primary/30 text-primary hover:bg-primary/10 inline-flex cursor-pointer items-center gap-2 rounded-xl border px-8 py-4 font-semibold transition-colors max-[426px]:px-6 max-[426px]:py-3"
           >
             <Images className="size-5" />
