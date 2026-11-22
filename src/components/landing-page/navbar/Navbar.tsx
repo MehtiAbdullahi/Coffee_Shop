@@ -26,7 +26,7 @@ const navLinks: navLinksTypes[] = [
   { title: "Home", href: "/#home" },
   { title: "Shop", href: "/#shop" },
   { title: "Blog", href: "/#blog" },
-  { title: "About", href: "/#about" },
+  { title: "About", href: "/about-us" },
   { title: "Contact", href: "/#contact" },
 ];
 
@@ -76,7 +76,7 @@ const Navbar = () => {
         className={cn(
           "mt-5 flex items-center justify-between px-5 py-2 [&>div]:flex [&>div]:items-center",
           scrolled &&
-            "fixed right-0 left-0 z-20 mx-6 rounded-full shadow-sm shadow-black/10 backdrop-blur-sm xl:mx-48",
+            "fixed right-0 left-0 z-50 mx-6 rounded-full shadow-sm shadow-black/10 backdrop-blur-sm xl:mx-48",
         )}
       >
         <div className="flex items-center lg:gap-2">
