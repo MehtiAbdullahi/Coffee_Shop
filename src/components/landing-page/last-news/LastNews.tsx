@@ -2,172 +2,22 @@
 
 import React from "react";
 import Link from "next/link";
-import {
-  motion,
-  useMotionTemplate,
-  useMotionValue,
-  useReducedMotion,
-  useSpring,
-  useTransform,
-} from "motion/react";
-import { ArrowRight, CalendarDays, MessageCircle } from "lucide-react";
-
-interface newsBox {
-  id: number;
-  src: string;
-  title: string;
-  date: string;
-  countComments: number;
-  href?: string;
-}
-
-const boxs: newsBox[] = [
-  {
-    id: 1,
-    src: "/images/backgrounds/blog-1.webp",
-    title: "How to make American coffee at home that you feel on shop",
-    date: "10/May/2025",
-    countComments: 10,
-  },
-  {
-    id: 2,
-    src: "/images/backgrounds/coffee.webp",
-    title: "Perfect Drinks for Relaxing Evenings",
-    date: "10/May/2025",
-    countComments: 14,
-  },
-  {
-    id: 3,
-    src: "/images/backgrounds/coffee-machin.webp",
-    title: "The best instant coffee you can have right now on a budget",
-    date: "10/May/2025",
-    countComments: 8,
-  },
-];
+import { motion, useReducedMotion } from "motion/react";
+import BlogBox from "@/components/blog-box/BlogBox";
+import { boxs } from "@/app/blog/_data/content";
+import { ArrowRight } from "lucide-react";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
-/* ------------------------------------------------------------------ */
-/*  کارت خبر با افکت 3D tilt + glare                                   */
-/* ------------------------------------------------------------------ */
-const NewsCard = ({ item }: { item: newsBox }) => {
-  const reduced = useReducedMotion();
-
-  // موقعیت ماوس نسبت به کارت، بین -0.5 و 0.5
-  const px = useMotionValue(0);
-  const py = useMotionValue(0);
-  const sx = useSpring(px, { stiffness: 180, damping: 18 });
-  const sy = useSpring(py, { stiffness: 180, damping: 18 });
-
-  const rotateY = useTransform(sx, [-0.5, 0.5], [-8, 8]);
-  const rotateX = useTransform(sy, [-0.5, 0.5], [8, -8]);
-
-  const glareX = useTransform(sx, [-0.5, 0.5], [0, 100]);
-  const glareY = useTransform(sy, [-0.5, 0.5], [0, 100]);
-  const glare = useMotionTemplate`radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,0.22), transparent 55%)`;
-
-  const onPointerMove = (e: React.PointerEvent<HTMLElement>) => {
-    // فقط ماوس؛ روی لمسی tilt نداریم
-    if (reduced || e.pointerType !== "mouse") return;
-    const rect = e.currentTarget.getBoundingClientRect();
-    px.set((e.clientX - rect.left) / rect.width - 0.5);
-    py.set((e.clientY - rect.top) / rect.height - 0.5);
-  };
-
-  const reset = () => {
-    px.set(0);
-    py.set(0);
-  };
-
-  return (
-    <motion.div
-      variants={{
-        hidden: { opacity: 0, y: 50 },
-        show: {
-          opacity: 1,
-          y: 0,
-          transition: { duration: 0.8, ease: EASE },
-        },
-      }}
-      style={{ perspective: 1000 }}
-      className="h-full"
-    >
-      <motion.article
-        onPointerMove={onPointerMove}
-        onPointerLeave={reset}
-        style={
-          reduced
-            ? undefined
-            : { rotateX, rotateY, transformStyle: "preserve-3d" }
-        }
-        className="group bg-card text-card-foreground border-border relative flex h-full flex-col overflow-hidden rounded-3xl border shadow-xl shadow-black/5 transition-shadow duration-500 hover:shadow-2xl hover:shadow-black/20"
-      >
-        {/* تصویر */}
-        <div className="relative aspect-4/3 overflow-hidden">
-          <img
-            src={item.src}
-            alt={item.title}
-            loading="lazy"
-            decoding="async"
-            className="size-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-          />
-          <div
-            aria-hidden
-            className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent"
-          />
-          {/* تاریخ روی عکس */}
-          <span className="absolute top-4 left-4 inline-flex items-center gap-1.5 rounded-full bg-white/85 px-3 py-1.5 text-xs font-semibold text-neutral-900 backdrop-blur-md">
-            <CalendarDays className="size-3.5" />
-            {item.date}
-          </span>
-        </div>
-
-        {/* محتوا */}
-        <div
-          className="flex flex-1 flex-col gap-4 p-6"
-          style={reduced ? undefined : { transform: "translateZ(30px)" }}
-        >
-          <h3 className="line-clamp-2 min-h-14 text-lg leading-7 font-bold sm:text-xl">
-            {item.title}
-          </h3>
-
-          <div className="border-border mt-auto flex items-center justify-between border-t pt-4 text-sm">
-            <span className="inline-flex items-center gap-1.5 opacity-70">
-              <MessageCircle className="size-4" />
-              {item.countComments} comments
-            </span>
-            <Link
-              href={item.href ?? `/blog/${item.id}`}
-              className="text-primary inline-flex items-center gap-1.5 font-semibold after:absolute after:inset-0 after:content-[''] focus-visible:outline-none"
-            >
-              Read more
-              <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1.5" />
-            </Link>
-          </div>
-        </div>
-
-        {/* glare */}
-        {!reduced && (
-          <motion.div
-            aria-hidden
-            style={{ background: glare }}
-            className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-          />
-        )}
-      </motion.article>
-    </motion.div>
-  );
-};
-
-/* ------------------------------------------------------------------ */
-/*  Section                                                            */
-/* ------------------------------------------------------------------ */
 const LastNews = () => {
   const reduced = useReducedMotion();
   const headingWords = "Latest news & blog".split(" ");
 
   return (
-    <section id="blog" className="relative overflow-hidden bg-size-[cover,auto] bg-left bg-no-repeat py-20 sm:py-24 lg:bg-[url('/images/backgrounds/hero-bg.webp')] xl:py-32">
+    <section
+      id="blog"
+      className="relative overflow-hidden bg-size-[cover,auto] bg-left bg-no-repeat py-20 sm:py-24 lg:bg-[url('/images/backgrounds/hero-bg.webp')] xl:py-32"
+    >
       {/* الگوی فنجان با حرکت شناور */}
       <motion.img
         src="/images/backgrounds/coffee-cup-pattern.webp"
@@ -230,8 +80,8 @@ const LastNews = () => {
           transition={{ staggerChildren: 0.15, delayChildren: 0.2 }}
           className="grid w-full max-w-6xl grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8"
         >
-          {boxs.map((b) => (
-            <NewsCard key={b.id} item={b} />
+          {boxs.slice(0, 3).map((b) => (
+            <BlogBox key={b.id} item={b} />
           ))}
         </motion.div>
 
