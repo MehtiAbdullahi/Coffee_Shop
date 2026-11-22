@@ -27,7 +27,7 @@ const navLinks: navLinksTypes[] = [
   { title: "Shop", href: "/#shop" },
   { title: "Blog", href: "/#blog" },
   { title: "About", href: "/about-us" },
-  { title: "Contact", href: "/#contact" },
+  { title: "Contact", href: "/contact" },
 ];
 
 const Navbar = () => {
