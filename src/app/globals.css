@@ -31,6 +31,34 @@
       transform: translateY(calc(100% / -6));
     }
   }
+
+  --animate-animated-testimonials-in: animated-testimonials-in 200ms ease-in-out
+    both;
+  --animate-animated-testimonials-rise: animated-testimonials-rise 400ms
+    ease-in-out;
+  --animate-animated-testimonials-word: animated-testimonials-word 200ms
+    ease-in-out calc(var(--animated-testimonials-word, 0) * 20ms) both;
+}
+
+@keyframes animated-testimonials-in {
+  from {
+    opacity: 0;
+    translate: 0 1.25rem;
+  }
+}
+
+@keyframes animated-testimonials-rise {
+  50% {
+    translate: 0 -5%;
+  }
+}
+
+@keyframes animated-testimonials-word {
+  from {
+    filter: blur(10px);
+    opacity: 0;
+    translate: 0 5px;
+  }
 }
 
 body {
