@@ -12,7 +12,7 @@ This project aims to deliver a smooth and visually engaging online coffee shoppi
 
 <!-- Replace the image paths below with your actual screenshots. -->
 
-![Coffee Shop Homepage](./public/images/readme/homepage.png)
+![Coffee Shop Homepage](./public/images/readme/HomePage.png)
 
 ---
 
