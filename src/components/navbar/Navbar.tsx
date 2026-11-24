@@ -1,8 +1,5 @@
 "use client";
 import Link from "next/link";
-
-import { motion, useReducedMotion } from "motion/react";
-
 // icons
 import CartNav from "@/assets/icons/cart.svg";
 import NavLogo from "@/assets/icons/nav-logo.svg";
@@ -66,7 +63,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="relative container mx-auto h-25 px-3 max-lg:px-0 max-md:px-3">
+    <nav className="relative z-20 container mx-auto h-25 px-3 max-lg:px-0 max-md:px-3">
       <Motions
         y={-20}
         ease="soft"
@@ -74,7 +71,7 @@ const Navbar = () => {
         classMotion={cn(
           "mt-5 flex items-center justify-between px-5 py-2 [&>div]:flex [&>div]:items-center",
           scrolled &&
-            "fixed right-0 left-0 z-50 mx-6 rounded-full shadow-sm shadow-black/10 backdrop-blur-sm xl:mx-48",
+            "fixed right-0 left-0 z-20 mx-6 rounded-full shadow-sm shadow-black/10 backdrop-blur-sm xl:mx-48",
         )}
       >
         <div className="flex items-center lg:gap-2">
@@ -97,46 +94,48 @@ const Navbar = () => {
               "fixed inset-x-0 z-50 mx-auto w-[95%] rounded-2xl bg-white shadow-md shadow-black/10 backdrop-blur-3xl",
           )}
         >
-          <ul className="w-full justify-around md:flex">
-            <MotionHighlight
-              hover
-              highlightClassName="rounded-none max-md:text-white md:bg-transparent bg-primary md:border-b-2 border-primary"
-              className="flex w-full items-center justify-around"
-            >
-              <ul className="w-full justify-around md:flex">
-                <div className="flex w-full cursor-pointer justify-end p-5 md:hidden">
-                  <LuX size={28} onClick={() => setShowMbMenu(!showMbMenu)} />
-                </div>
+          <MotionHighlight
+            hover
+            highlightClassName="rounded-none md:bg-transparent bg-primary md:border-b-2 border-primary"
+            className="flex w-full items-center justify-around"
+          >
+            <ul className="w-full justify-around md:flex">
+              <div className="flex w-full cursor-pointer justify-end p-5 md:hidden">
+                <LuX size={28} onClick={() => setShowMbMenu(!showMbMenu)} />
+              </div>
 
-                {navLinks.map(({ href, title }) => {
-                  const isActive = hash === href.replace("/", "");
+              {navLinks.map(({ href, title }) => {
+                const isActive =
+                  hash === href.replace("/", "") ||
+                  pathName === href.replace("#", "") ||
+                  href === hash;
+                console.log(isActive);
 
-                  return (
-                    <MotionHighlightItem key={href} value={href} asChild>
-                      <Link
-                        className="flex-1 cursor-pointer"
-                        href={href}
-                        onClick={() => setHash(href)}
+                return (
+                  <MotionHighlightItem key={href} value={href} asChild>
+                    <Link
+                      className="flex-1 cursor-pointer"
+                      href={href}
+                      onClick={() => {
+                        setHash(href);
+                        setShowMbMenu(false); // به‌جای toggle
+                      }}
+                    >
+                      <li
+                        className={cn(
+                          "md:text-primary relative z-10 py-2 max-md:hover:text-white text-center font-semibold transition duration-200 max-md:py-6",
+                          isActive &&
+                            "max-md:bg-primary md:border-b-primary max-md:text-white md:border-b-2",
+                        )}
                       >
-                        <li
-                          className={cn(
-                            "text-primary max-md:hover:bg-primary py-2 text-center font-semibold transition duration-200 max-md:py-6 max-md:hover:text-white",
-                            isActive
-                              ? "md:border-b-primary max-md:bg-primary max-md:text-white md:border-b-2"
-                              : pathName === href.replace("#", "")
-                                ? "md:border-b-primary max-md:bg-primary max-md:text-white md:border-b-2"
-                                : "",
-                          )}
-                        >
-                          {title}
-                        </li>
-                      </Link>
-                    </MotionHighlightItem>
-                  );
-                })}
-              </ul>
-            </MotionHighlight>
-          </ul>
+                        {title}
+                      </li>
+                    </Link>
+                  </MotionHighlightItem>
+                );
+              })}
+            </ul>
+          </MotionHighlight>
         </div>
         <div className="flex items-center gap-3 lg:gap-5">
           <div
