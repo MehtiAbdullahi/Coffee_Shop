@@ -9,6 +9,7 @@ import NavLogo from "@/assets/icons/nav-logo.svg";
 import SearchIcon from "@/assets/icons/search.svg";
 import { LuMenu } from "react-icons/lu";
 import { LuX } from "react-icons/lu";
+
 import { useEffect, useState } from "react";
 import { cn } from "cn";
 import {
@@ -16,6 +17,7 @@ import {
   MotionHighlightItem,
 } from "@/components/ui/motion-highlight";
 import { usePathname } from "next/navigation";
+import { Motions } from "@/components/motions/Motions";
 
 interface navLinksTypes {
   title: string;
@@ -34,9 +36,6 @@ const Navbar = () => {
   const [showMbMenu, setShowMbMenu] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [hash, setHash] = useState("");
-
-  const EASE = [0.22, 1, 0.36, 1] as const;
-  const reduced = useReducedMotion();
 
   const pathName = usePathname();
 
@@ -68,12 +67,11 @@ const Navbar = () => {
 
   return (
     <nav className="relative container mx-auto h-25 px-3 max-lg:px-0 max-md:px-3">
-      <motion.div
-        initial={reduced ? false : { opacity: 0, y: -20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.5 }}
-        transition={{ duration: 1, ease: EASE }}
-        className={cn(
+      <Motions
+        y={-20}
+        ease="soft"
+        duration={1}
+        classMotion={cn(
           "mt-5 flex items-center justify-between px-5 py-2 [&>div]:flex [&>div]:items-center",
           scrolled &&
             "fixed right-0 left-0 z-50 mx-6 rounded-full shadow-sm shadow-black/10 backdrop-blur-sm xl:mx-48",
@@ -102,7 +100,7 @@ const Navbar = () => {
           <ul className="w-full justify-around md:flex">
             <MotionHighlight
               hover
-              highlightClassName="rounded-none max-md:text-whtie md:bg-transparent bg-primary md:border-b-2 border-primary"
+              highlightClassName="rounded-none max-md:text-white md:bg-transparent bg-primary md:border-b-2 border-primary"
               className="flex w-full items-center justify-around"
             >
               <ul className="w-full justify-around md:flex">
@@ -112,10 +110,6 @@ const Navbar = () => {
 
                 {navLinks.map(({ href, title }) => {
                   const isActive = hash === href.replace("/", "");
-                  console.log("hash", hash);
-                  console.log("href", href);
-                  console.log("isActive", isActive);
-                  console.log(pathName === href.replace("#", ""));
 
                   return (
                     <MotionHighlightItem key={href} value={href} asChild>
@@ -179,7 +173,7 @@ const Navbar = () => {
             <LuMenu size="24px" />
           </div>
         </div>
-      </motion.div>
+      </Motions>
     </nav>
   );
 };

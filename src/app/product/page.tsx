@@ -1,10 +1,9 @@
-"use client";
 import React from "react";
-import { motion, useReducedMotion } from "motion/react";
 import Link from "next/link";
 import ProductBox from "@/components/product-box/ProductBox";
 import Accordion from "@/components/acordion/Acordion";
 import { AccordionItem } from "@/ts-types/types";
+import { Motions } from "@/components/motions/Motions";
 
 const accordionItems: AccordionItem[] = [
   {
@@ -55,32 +54,24 @@ const accordionItems: AccordionItem[] = [
 ];
 
 const Product = () => {
-  const EASE = [0.22, 1, 0.36, 1] as const;
-  const reduced = useReducedMotion();
 
   return (
     <section className="container mx-auto my-12 px-6 lg:px-12">
       <div className="flex gap-16 max-lg:flex-col">
         <div className="flex basis-[50%] flex-col gap-6">
-          <motion.div
-            initial={reduced ? false : { opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.5 }}
-            transition={{ duration: 1, ease: EASE }}
-          >
+          <Motions x={-20} ease="soft" duration={1}>
             <img
               src="/images/products/coffee4-lg.webp"
               alt="product"
               className="h-auto w-full rounded-2xl"
             />
-          </motion.div>
+          </Motions>
 
-          <motion.div
-            initial={reduced ? false : { opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.9 }}
-            transition={{ duration: 1, ease: EASE }}
-            className="flex flex-wrap justify-between"
+          <Motions
+            y={20}
+            duration={1}
+            amount={0.9}
+            classMotion="flex flex-wrap justify-between"
           >
             <img
               src="/images/products/coffee6.webp"
@@ -98,15 +89,14 @@ const Product = () => {
               className="h-auto w-32 max-[450px]:w-20 sm:w-42 md:w-52 lg:w-32 xl:w-44 2xl:w-52"
               alt="product"
             />
-          </motion.div>
+          </Motions>
         </div>
         <div className="flex basis-[50%] flex-col">
-          <motion.div
-            initial={reduced ? false : { opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.8 }}
-            transition={{ duration: 1, ease: EASE }}
-            className="flex flex-col gap-6"
+          <Motions
+            x={20}
+            duration={1}
+            amount={0.8}
+            classMotion="flex flex-col gap-6"
           >
             <h2 className="text-2xl font-bold md:text-3xl">
               Barista Coffee Bean - Hard Roast
@@ -128,13 +118,8 @@ const Product = () => {
                 coffee farms, it delivers a perfectly balanced cup every time.
               </p>
             </div>
-          </motion.div>
-          <motion.div
-            initial={reduced ? false : { opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.8 }}
-            transition={{ duration: 1, ease: EASE }}
-          >
+          </Motions>
+          <Motions y={20} duration={1} amount={0.8}>
             <div className="mt-6 flex flex-wrap gap-4 max-md:justify-center">
               <Link
                 href="/blog"
@@ -150,16 +135,10 @@ const Product = () => {
                 Buy Now
               </Link>
             </div>
-          </motion.div>
-
-          <motion.div
-            initial={reduced ? false : { opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.5 }}
-            transition={{ duration: 1, ease: EASE }}
-          >
+          </Motions>
+          <Motions y={20} duration={1} amount={0.5}>
             <Accordion items={accordionItems} />
-          </motion.div>
+          </Motions>
         </div>
       </div>
       <div className="text-center">

@@ -12,6 +12,7 @@ import {
   useTransform,
 } from "motion/react";
 import { ArrowLeft, ArrowRight, Coffee, Quote, Star } from "lucide-react";
+import { Motions } from "@/components/motions/Motions";
 
 const AUTOPLAY_SECONDS = 6;
 
@@ -216,7 +217,7 @@ const Client = () => {
       <motion.div
         aria-hidden
         style={reduced ? undefined : { y: bgY }}
-        className="absolute inset-x-0 -inset-y-[10%] bg-[url('/images/backgrounds/client-bg.webp')] bg-cover bg-center bg-no-repeat"
+        className="absolute inset-x-0 inset-y-[-10%] bg-[url('/images/backgrounds/client-bg.webp')] bg-cover bg-center bg-no-repeat"
       />
       <div className="bg-client-overlay/60 absolute inset-0" />
       <div className="absolute inset-0 bg-linear-to-b from-black/30 via-transparent to-black/40" />
@@ -224,12 +225,13 @@ const Client = () => {
       <div className="relative z-10 container mx-auto px-5">
         {/* هدر سکشن */}
         <div className="mx-auto mb-12 flex max-w-3xl flex-col items-center text-center sm:mb-16 lg:mb-20">
-          <motion.div
-            initial={reduced ? false : { opacity: 0, y: 16, scale: 0.95 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="mb-6 inline-flex items-center gap-2 rounded-full border border-amber-200/30 bg-white/10 px-4 py-1.5 text-sm text-amber-100 backdrop-blur-md"
+          <Motions
+            y={16}
+            scale={0.95}
+            duration={0.6}
+            ease="soft"
+            amount={0.3}
+            classMotion="mb-6 inline-flex items-center gap-2 rounded-full border border-amber-200/30 bg-white/10 px-4 py-1.5 text-sm text-amber-100 backdrop-blur-md"
           >
             <span className="flex">
               {Array.from({ length: 5 }).map((_, i) => (
@@ -240,9 +242,10 @@ const Client = () => {
               ))}
             </span>
             <span>4.9 average from happy customers</span>
-          </motion.div>
+          </Motions>
 
           {/* عنوان: ورود کلمه به کلمه (تریگر روی خود h2 است، نه روی کلمه‌های clip شده) */}
+
           <motion.h2
             initial={reduced ? "show" : "hidden"}
             whileInView="show"
@@ -268,17 +271,12 @@ const Client = () => {
             ))}
           </motion.h2>
 
-          <motion.p
-            initial={reduced ? false : { opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.7, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-5 max-w-xl text-base leading-7 text-pretty text-white/70 sm:text-lg"
-          >
-            Real stories from coffee shop owners, designers and home brewers who
-            made our products part of their daily routine.
-          </motion.p>
-
+          <Motions y={20} duration={0.7} delay={0.6} ease="soft" amount={0.3}>
+            <p className="mt-5 max-w-xl text-base leading-7 text-pretty text-white/70 sm:text-lg">
+              Real stories from coffee shop owners, designers and home brewers
+              who made our products part of their daily routine.
+            </p>
+          </Motions>
           {/* خط تزئینی با آیکون قهوه */}
           <motion.div
             aria-hidden

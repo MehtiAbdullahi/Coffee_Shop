@@ -1,27 +1,39 @@
-"use client";
-import { motion, Variants } from "framer-motion";
+import React, { ReactElement } from "react";
+import { Motions, TitleMotion } from "@/components/motions/Motions";
 import Link from "next/link";
-import React from "react";
 
 // icons
 import { LuMapPin } from "react-icons/lu";
 import { LuPhone } from "react-icons/lu";
 import { LuMail } from "react-icons/lu";
 
-const EASE = [0.22, 1, 0.36, 1] as const;
+interface contactBoxType {
+  id: number;
+  title: string;
+  des: string;
+  icon: ReactElement;
+}
 
-const TITLE = "Contact";
-const TITLE2 = "Contact Information";
-
-const word: Variants = {
-  hidden: { y: "110%", rotate: 3 },
-  show: { y: "0%", rotate: 0, transition: { duration: 0.8, ease: EASE } },
-};
-
-const headerContainer: Variants = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.06, delayChildren: 0.05 } },
-};
+const contactBox: contactBoxType[] = [
+  {
+    id: 1,
+    title: "Head Office",
+    des: "1234 Coffee Lane, Suite 200 Seattle, WA 98101, USA",
+    icon: <LuMapPin size={54} />,
+  },
+  {
+    id: 1,
+    title: "Phone",
+    des: "+1 (206) 555-1234 (Mon Fri, 9 AM 5 PM PST)",
+    icon: <LuPhone size={54} />,
+  },
+  {
+    id: 1,
+    title: "Email",
+    des: "support@gmail.com",
+    icon: <LuMail size={54} />,
+  },
+];
 
 const ContactPage = () => {
   return (
@@ -32,39 +44,18 @@ const ContactPage = () => {
         className="absolute inset-x-0 top-0 -z-10 h-full w-full object-cover"
       />
       <section className="relative z-10 container mx-auto px-8 xl:px-12">
-        <motion.div
-          variants={headerContainer}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.4 }}
-          className="mx-auto my-12 max-w-5xl px-4 text-center lg:my-24"
-        >
-          <h2
-            id={`${TITLE}-title`}
-            aria-label={TITLE}
-            className="text-primary text-xl leading-tight font-bold tracking-tight text-balance sm:text-5xl lg:text-4xl xl:text-5xl"
-          >
-            {TITLE.split(" ").map((w, i) => (
-              <span
-                key={i}
-                aria-hidden="true"
-                className="inline-block overflow-hidden pb-1 align-top"
-              >
-                <motion.span variants={word} className="inline-block">
-                  {w}
-                  {"\u00A0"}
-                </motion.span>
-              </span>
-            ))}
-          </h2>
-        </motion.div>
+        <TitleMotion
+          amount={0.4}
+          classMotion="mx-auto my-12 max-w-5xl px-4 text-center lg:my-24"
+          title="Contact"
+          titleClass="text-primary text-xl leading-tight font-bold tracking-tight text-balance sm:text-5xl lg:text-4xl xl:text-5xl"
+        />
         <div className="flex justify-between max-md:flex-col-reverse max-md:gap-12 xl:justify-around">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.25, duration: 0.5 }}
-            className="text-primary flex basis-[45%] flex-col gap-4 max-md:text-center lg:gap-8 xl:gap-12 [&>p]:leading-8 [&>p]:text-balance"
+          <Motions
+            x={-20}
+            delay={0.25}
+            duration={0.5}
+            classMotion="text-primary flex basis-[45%] flex-col gap-4 max-md:text-center lg:gap-8 xl:gap-12 [&>p]:leading-8 [&>p]:text-balance"
           >
             <h2 className="text-3xl font-semibold">Returns</h2>
             <p>
@@ -99,13 +90,13 @@ const ContactPage = () => {
                 </svg>
               </span>
             </Link>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.25, duration: 0.5 }}
-            className="border-border basis-[50%] rounded-md border-2 bg-white p-8"
+          </Motions>
+
+          <Motions
+            x={20}
+            delay={0.25}
+            duration={0.5}
+            classMotion="border-border basis-[50%] rounded-md border-2 bg-white p-8"
           >
             <form
               action=""
@@ -129,12 +120,11 @@ const ContactPage = () => {
                 ></textarea>
               </div>
               <div className=""></div>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.25, duration: 0.5 }}
-                className="mt-8 md:mt-10"
+              <Motions
+                y={20}
+                delay={0.25}
+                duration={0.5}
+                classMotion="mt-8 md:mt-10"
               >
                 <button className="group bg-primary md:hover:shadow-primary/30 relative inline-flex cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-2xl px-6 py-3 font-semibold text-white transition-all duration-300 active:scale-[0.98] sm:px-8 sm:py-4 md:hover:shadow-xl">
                   <span className="relative z-10 text-sm md:text-xl">
@@ -144,77 +134,25 @@ const ContactPage = () => {
                   {/* Hover shine effect */}
                   <span className="absolute inset-0 -translate-x-full bg-linear-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
                 </button>
-              </motion.div>
+              </Motions>
             </form>
-          </motion.div>
+          </Motions>
         </div>
         <div className="">
-          <motion.div
-            variants={headerContainer}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.2 }}
-            className="mx-auto max-w-5xl px-4 text-center my-24"
-          >
-            <h2
-              id={`${TITLE2}-title`}
-              aria-label={TITLE2}
-              className="text-primary text-base leading-tight font-bold tracking-tight text-balance sm:text-lg lg:text-xl xl:text-3xl"
-            >
-              {TITLE2.split(" ").map((w, i) => (
-                <span
-                  key={i}
-                  aria-hidden="true"
-                  className="inline-block overflow-hidden pb-1 align-top"
-                >
-                  <motion.span variants={word} className="inline-block">
-                    {w}
-                    {"\u00A0"}
-                  </motion.span>
-                </span>
-              ))}
-            </h2>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.5, duration: 0.5 }}
-            >
-              If you have any questions, feel free to reach out to us using the
-              details below
-            </motion.p>
-          </motion.div>
+          <TitleMotion
+            title="Contact Information"
+            titleClass="text-primary text-base leading-tight font-bold tracking-tight text-balance sm:text-lg lg:text-xl xl:text-3xl"
+            amount={0.2}
+            classMotion="mx-auto my-24 max-w-5xl px-4 text-center"
+          />
           <div className="[&>div]:border-border text-primary flex flex-wrap justify-center gap-6 [&>div]:flex [&>div]:h-72 [&>div]:min-h-0 [&>div]:w-96 [&>div]:min-w-60 [&>div]:flex-1 [&>div]:flex-col [&>div]:items-center [&>div]:justify-center [&>div]:rounded-xl [&>div]:border-2 [&>div]:bg-white [&>div]:p-6 [&>div>p]:text-center [&>div>p]:tracking-wide [&>div>p]:text-wrap [&>div>span]:text-xl [&>div>span]:font-semibold">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.25, duration: 0.2 }}
-            >
-              <LuMapPin size={54} />
-              <span className="mt-6 mb-3">Head Office</span>
-              <p>1234 Coffee Lane, Suite 200 Seattle, WA 98101, USA</p>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.25, duration: 0.2 }}
-            >
-              <LuPhone size={54} />
-              <span className="mt-6 mb-3">Phone</span>
-              <p>+1 (206) 555-1234 (Mon Fri, 9 AM 5 PM PST)</p>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.25, duration: 0.2 }}
-            >
-              <LuMail size={54} />
-              <span className="mt-6 mb-3">Email</span>
-              <p>support@gmail.com</p>
-            </motion.div>
+            {contactBox.map(({ des, icon, id, title }) => (
+              <Motions key={id} y={20} delay={0.25} duration={0.2}>
+                {icon}
+                <span className="mt-6 mb-3">{title}</span>
+                <p>{des}</p>
+              </Motions>
+            ))}
           </div>
           <div className="my-24 flex w-full justify-center">
             <img

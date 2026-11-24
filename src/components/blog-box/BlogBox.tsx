@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 
 import Link from "next/link";
@@ -10,6 +11,7 @@ import {
   useTransform,
 } from "framer-motion";
 import { ArrowRight, CalendarDays, MessageCircle } from "lucide-react";
+import { Motions } from "../motions/Motions";
 
 interface newsBox {
   id: number;
@@ -19,8 +21,6 @@ interface newsBox {
   countComments: number;
   href?: string;
 }
-
-const EASE = [0.22, 1, 0.36, 1] as const;
 
 const BlogBox = ({ item }: { item: newsBox }) => {
   const reduced = useReducedMotion();
@@ -52,17 +52,13 @@ const BlogBox = ({ item }: { item: newsBox }) => {
   };
 
   return (
-    <motion.div
-      variants={{
-        hidden: { opacity: 0, y: 50 },
-        show: {
-          opacity: 1,
-          y: 0,
-          transition: { duration: 0.8, ease: EASE },
-        },
-      }}
-      style={{ perspective: 1000 }}
-      className="h-full"
+    <Motions
+      classMotion="h-full"
+      duration={0.5}
+      ease="smooth"
+      amount={0.4}
+      y={50}
+      perspective={1000}
     >
       <motion.article
         onPointerMove={onPointerMove}
@@ -99,7 +95,7 @@ const BlogBox = ({ item }: { item: newsBox }) => {
           className="flex flex-1 flex-col gap-2 p-2 sm:gap-4 md:p-4"
           style={reduced ? undefined : { transform: "translateZ(30px)" }}
         >
-          <h3 className="text-sm md:text-md line-clamp-2 font-bold max-lg:truncate md:leading-7 lg:text-xl">
+          <h3 className="md:text-md line-clamp-2 text-sm font-bold max-lg:truncate md:leading-7 lg:text-xl">
             {item.title}
           </h3>
 
@@ -110,7 +106,7 @@ const BlogBox = ({ item }: { item: newsBox }) => {
             </span>
             <Link
               href={item.href ?? `/blog/${item.id}`}
-              className="text-primary max-sm:text-xs inline-flex items-center gap-1.5 font-semibold after:absolute after:inset-0 after:content-[''] focus-visible:outline-none"
+              className="text-primary inline-flex items-center gap-1.5 font-semibold after:absolute after:inset-0 after:content-[''] focus-visible:outline-none max-sm:text-xs"
             >
               Read more
               <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1.5" />
@@ -127,7 +123,7 @@ const BlogBox = ({ item }: { item: newsBox }) => {
           />
         )}
       </motion.article>
-    </motion.div>
+    </Motions>
   );
 };
 

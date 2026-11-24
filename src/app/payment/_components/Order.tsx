@@ -1,56 +1,22 @@
 import React from "react";
-import { motion, useReducedMotion, Variants } from "framer-motion";
 import Link from "next/link";
-
-const TITLE_ORDER = "Your Order";
+import { Motions, TitleMotion } from "@/components/motions/Motions";
 
 const Order = () => {
-  const EASE = [0.22, 1, 0.36, 1] as const;
-  const reduced = useReducedMotion();
-
-  const word: Variants = {
-    hidden: { y: "110%", rotate: 3 },
-    show: { y: "0%", rotate: 0, transition: { duration: 0.8, ease: EASE } },
-  };
-
-  const headerContainer: Variants = {
-    hidden: {},
-    show: { transition: { staggerChildren: 0.06, delayChildren: 0.05 } },
-  };
-
   return (
     <div className="basis-[48%]">
-      <motion.div
-        variants={headerContainer}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, amount: 0.4 }}
-        className="max-w-5xl px-4"
-      >
-        <h2
-          id="shop-title"
-          aria-label={TITLE_ORDER}
-          className="my-6 ml-2 text-3xl font-medium"
-        >
-          {TITLE_ORDER.split(" ").map((w, i) => (
-            <span
-              key={i}
-              aria-hidden="true"
-              className="inline-block overflow-hidden pb-1 align-top"
-            >
-              <motion.span variants={word} className="inline-block">
-                {w}
-                {"\u00A0"}
-              </motion.span>
-            </span>
-          ))}
-        </h2>
-      </motion.div>
-      <motion.div
-        initial={reduced ? false : { opacity: 0, x: 20 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 1, ease: EASE }}
+      <TitleMotion
+        title="Your Order"
+        titleClass="my-6 ml-2 text-3xl font-medium"
+        classMotion="max-w-5xl px-4"
+        amount={0.4}
+      />
+      <Motions
+        duration={0.5}
+        ease="smooth"
+        x={20}
+        amount={0.3}
+        classMotion="max-lg:border-border rounded-2xl max-lg:w-full max-lg:border max-lg:bg-white max-lg:p-6"
       >
         <div className="border-border flex flex-col gap-12 rounded-xl border-2 bg-white px-4 py-6 [&>div]:flex [&>div]:flex-col">
           <div className="[&>div:not(:last-child)]:border-b-border flex justify-between [&>div]:flex [&>div]:justify-between [&>div]:py-4 [&>div:not(:last-child)]:border-b [&>div>span]:font-medium">
@@ -132,12 +98,13 @@ const Order = () => {
               .
             </p>
           </div>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.25, duration: 0.5 }}
-            className="mt-4 flex md:mt-6"
+          <Motions
+            duration={0.5}
+            ease="smooth"
+            y={20}
+            delay={0.25}
+            amount={0.5}
+            classMotion="mt-4 flex md:mt-6"
           >
             <button className="group bg-primary md:hover:shadow-primary/30 relative inline-flex w-full cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-xl px-6 py-3 font-semibold text-white transition-all duration-300 hover:shadow-xl active:scale-95 sm:px-8 sm:py-4">
               <span className="relative z-10 text-sm md:text-xl">
@@ -147,9 +114,9 @@ const Order = () => {
               {/* Hover shine effect */}
               <span className="absolute inset-0 -translate-x-full bg-linear-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
             </button>
-          </motion.div>
+          </Motions>
         </div>
-      </motion.div>
+      </Motions>
     </div>
   );
 };

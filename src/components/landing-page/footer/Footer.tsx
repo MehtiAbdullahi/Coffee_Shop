@@ -26,6 +26,7 @@ import {
 
 // Icons
 import NavLogo from "@/assets/icons/nav-logo.svg";
+import { Motions } from "@/components/motions/Motions";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -65,7 +66,6 @@ const colVariants = {
 /*  Newsletter                                                         */
 /* ------------------------------------------------------------------ */
 const Newsletter = () => {
-  const reduced = useReducedMotion();
   const {
     register,
     handleSubmit,
@@ -74,7 +74,6 @@ const Newsletter = () => {
   } = useForm<FormValues>({ resolver: zodResolver(schema) });
 
   const onSubmit = async (data: FormValues) => {
-    // TODO: اینجا رو با API واقعی خودت عوض کن
     await new Promise((r) => setTimeout(r, 900));
     toast.success("You’re subscribed!", {
       description: `We’ll send the latest updates to ${data.email}`,
@@ -83,12 +82,13 @@ const Newsletter = () => {
   };
 
   return (
-    <motion.div
-      initial={reduced ? false : { opacity: 0, y: 40, scale: 0.98 }}
-      whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration: 0.8, ease: EASE }}
-      className="bg-primary relative overflow-hidden rounded-3xl px-6 py-10 text-white shadow-2xl shadow-black/20 sm:px-12 sm:py-14"
+    <Motions
+      y={40}
+      scale={0.98}
+      amount={0.3}
+      duration={0.8}
+      ease="smooth"
+      classMotion="bg-primary relative overflow-hidden rounded-3xl px-6 py-10 text-white shadow-2xl shadow-black/20 sm:px-12 sm:py-14"
     >
       {/* دایره‌های تزئینی */}
       <div
@@ -136,43 +136,35 @@ const Newsletter = () => {
                 className="w-full min-w-0 rounded-xl border-2 border-white/30 bg-white/15 px-4 py-3.5 font-semibold text-white placeholder-white/70 backdrop-blur-md transition-colors outline-none focus:border-white aria-invalid:border-red-300"
               />
             </div>
-            <motion.button
-              type="submit"
-              disabled={isSubmitting}
-              whileHover={{ y: -2 }}
-              whileTap={{ scale: 0.97 }}
-              className="text-primary inline-flex cursor-pointer items-center justify-center gap-2 rounded-xl bg-white px-8 py-3.5 font-semibold shadow-lg shadow-black/10 transition-opacity disabled:cursor-not-allowed disabled:opacity-80 max-[426px]:px-6"
-            >
+            <button className="text-primary inline-flex cursor-pointer items-center justify-center gap-2 rounded-xl bg-white px-8 py-3.5 font-semibold shadow-lg shadow-black/10 transition-all hover:scale-105 active:scale-100 disabled:cursor-not-allowed disabled:opacity-80 max-[426px]:px-6">
               {isSubmitting ? (
                 <Loader2 className="size-5 animate-spin" />
               ) : isSubmitSuccessful ? (
                 <Check className="size-5" />
               ) : null}
               Subscribe
-            </motion.button>
+            </button>
           </div>
 
           <div className="mt-2 min-h-6 text-left text-sm">
             <AnimatePresence mode="wait">
               {errors.email && (
-                <motion.p
+                <Motions
                   key="error"
-                  id="newsletter-error"
+                  id="newslatter-error"
                   role="alert"
-                  initial={{ opacity: 0, y: -6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -6 }}
-                  transition={{ duration: 0.2 }}
-                  className="text-red-100"
+                  y={-6}
+                  duration={0.2}
+                  classMotion="text-red-100"
                 >
-                  {errors.email.message}
-                </motion.p>
+                  <p>{errors.email.message}</p>
+                </Motions>
               )}
             </AnimatePresence>
           </div>
         </form>
       </div>
-    </motion.div>
+    </Motions>
   );
 };
 
@@ -198,8 +190,15 @@ const Footer = () => {
         className="grid grid-cols-1 gap-12 py-16 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr] lg:gap-16"
       >
         {/* برند + تماس */}
-        <motion.div variants={colVariants} className="sm:col-span-2 lg:col-span-1">
-          <Link href="/" className="inline-flex items-center" aria-label="Coffee home">
+        <motion.div
+          variants={colVariants}
+          className="sm:col-span-2 lg:col-span-1"
+        >
+          <Link
+            href="/"
+            className="inline-flex items-center"
+            aria-label="Coffee home"
+          >
             <NavLogo />
             <span className="text-nav_txt_cof font-PoetsenOne text-2xl font-normal tracking-wide sm:text-3xl">
               Cof<span className="text-nav_txt_fee">fee</span>

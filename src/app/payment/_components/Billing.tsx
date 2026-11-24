@@ -1,56 +1,21 @@
-import { motion, useReducedMotion, Variants } from "framer-motion";
 import React from "react";
-
-const TITLE_BILLING = "Billing Details";
+import { Motions, TitleMotion } from "@/components/motions/Motions";
 
 const Billing = () => {
-  const EASE = [0.22, 1, 0.36, 1] as const;
-  const reduced = useReducedMotion();
-
-  const word: Variants = {
-    hidden: { y: "110%", rotate: 3 },
-    show: { y: "0%", rotate: 0, transition: { duration: 0.8, ease: EASE } },
-  };
-
-  const headerContainer: Variants = {
-    hidden: {},
-    show: { transition: { staggerChildren: 0.06, delayChildren: 0.05 } },
-  };
-
   return (
     <div className="basis-[48%]">
-      <motion.div
-        variants={headerContainer}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, amount: 0.4 }}
-        className="max-w-5xl px-4"
-      >
-        <h2
-          id="shop-title"
-          aria-label={TITLE_BILLING}
-          className="my-6 ml-2 text-3xl font-medium"
-        >
-          {TITLE_BILLING.split(" ").map((w, i) => (
-            <span
-              key={i}
-              aria-hidden="true"
-              className="inline-block overflow-hidden pb-1 align-top"
-            >
-              <motion.span variants={word} className="inline-block">
-                {w}
-                {"\u00A0"}
-              </motion.span>
-            </span>
-          ))}
-        </h2>
-      </motion.div>
-      <motion.div
-        initial={reduced ? false : { opacity: 0, x: -20 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 1, ease: EASE }}
-        className="border-border rounded-xl border-2 bg-white px-4 py-6"
+      <TitleMotion
+        amount={0.4}
+        classMotion="max-w-5xl px-4"
+        title="Billing Details"
+        titleClass="my-6 ml-2 text-3xl font-medium"
+      />
+      <Motions
+        amount={0.3}
+        duration={0.5}
+        x={-20}
+        ease="smooth"
+        classMotion="border-border rounded-xl border-2 bg-white px-4 py-6"
       >
         <form
           action=""
@@ -109,17 +74,17 @@ const Billing = () => {
           <input type="checkbox" name="" id="" />
           <span>Create an account?</span>
         </div>
-      </motion.div>
-      <motion.div
-        initial={reduced ? false : { opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.5 }}
-        transition={{ duration: 1, ease: EASE }}
-        className="text-primary mt-4 ml-4 flex items-center gap-2"
+      </Motions>
+      <Motions
+        y={20}
+        amount={0.5}
+        duration={0.5}
+        ease="smooth"
+        classMotion="text-primary mt-4 ml-4 flex items-center gap-2"
       >
         <input type="checkbox" name="" id="" />
         <span>Ship to a different address?</span>
-      </motion.div>
+      </Motions>
     </div>
   );
 };

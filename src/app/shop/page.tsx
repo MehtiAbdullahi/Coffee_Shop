@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 
-import { motion, useReducedMotion } from "motion/react";
 import ListView from "@/assets/icons/list-view.svg";
 import ViewGrid from "@/assets/icons/view-grid.svg";
 import { cn } from "cn";
@@ -10,23 +9,16 @@ import {
   MotionHighlightItem,
 } from "@/components/ui/motion-highlight";
 import ProductBox from "@/components/product-box/ProductBox";
+import { Motions } from "@/components/motions/Motions";
 
 const ProductsPage = () => {
   const [selectedView, setSelectedView] = useState("view-grid");
   const [showFilters, setShowFilters] = useState(false);
 
-  const EASE = [0.22, 1, 0.36, 1] as const;
-  const reduced = useReducedMotion();
-
   return (
     <section className="container mx-auto my-12 px-6 md:px-12">
       <div className="flex items-center justify-between gap-2">
-        <motion.div
-          initial={reduced ? false : { opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 1, ease: EASE }}
-        >
+        <Motions x={-20} duration={1} amount={0.5}>
           <h3 className="text-3xl font-bold max-lg:hidden">Filters:</h3>
           <button
             onClick={() => setShowFilters(!showFilters)}
@@ -37,13 +29,13 @@ const ProductsPage = () => {
           >
             Show Filters
           </button>
-        </motion.div>
-        <motion.div
-          initial={reduced ? false : { opacity: 0, x: 20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 1, ease: EASE }}
-          className="flex items-center gap-2 rounded-xl bg-[#decea9] px-2 py-2 transition hover:scale-105 active:scale-100 md:px-3 md:py-2"
+        </Motions>
+        <Motions
+          x={20}
+          duration={1}
+          amount={0.5}
+
+          classMotion="flex items-center gap-2 rounded-xl bg-[#decea9] px-2 py-2 transition hover:scale-105 active:scale-100 md:px-3 md:py-2"
         >
           <MotionHighlight
             className="bg-muted inline-flex rounded-lg"
@@ -93,15 +85,14 @@ const ProductsPage = () => {
               </MotionHighlightItem>
             </fieldset>
           </MotionHighlight>
-        </motion.div>
+        </Motions>
       </div>
       <div className="relative my-8 flex items-start justify-between gap-12 max-lg:flex-col">
-        <motion.div
-          initial={reduced ? false : { opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 1, ease: EASE }}
-          className="right-0 left-0 z-10 max-lg:absolute"
+        <Motions
+          x={-20}
+          duration={1}
+          amount={0.5}
+          classMotion="right-0 left-0 z-10 max-lg:absolute"
         >
           <div
             className={cn(
@@ -229,7 +220,7 @@ const ProductsPage = () => {
               </div>
             </div>
           </div>
-        </motion.div>
+        </Motions>
         <div className="grid basis-[90%] grid-cols-2 xl:grid-cols-3">
           <ProductBox />
           <ProductBox />

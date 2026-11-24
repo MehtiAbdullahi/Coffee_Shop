@@ -1,23 +1,19 @@
-"use client";
 import React from "react";
 import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
 import Billing from "./_components/Billing";
 import Order from "./_components/Order";
+import { Motions } from "@/components/motions/Motions";
 
 const Payment = () => {
-  const EASE = [0.22, 1, 0.36, 1] as const;
-  const reduced = useReducedMotion();
-
   return (
     <section className="container mx-auto my-12 px-6 lg:px-12">
       <div className="lg:border-border text-primary flex items-center rounded-md p-4 max-lg:flex-col max-lg:gap-5 lg:justify-around lg:border-2 lg:bg-white">
-        <motion.div
-          initial={reduced ? false : { opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 1, ease: EASE }}
-          className="max-lg:border-border rounded-2xl max-lg:w-full max-lg:border max-lg:bg-white max-lg:p-6"
+        <Motions
+          duration={0.5}
+          ease="smooth"
+          x={-20}
+          amount={0.3}
+          classMotion="max-lg:border-border rounded-2xl max-lg:w-full max-lg:border max-lg:bg-white max-lg:p-6"
         >
           <span className="flex gap-2 max-lg:flex-wrap max-lg:justify-center">
             Returning customers?
@@ -25,14 +21,14 @@ const Payment = () => {
               Click here to login?
             </Link>
           </span>
-        </motion.div>
+        </Motions>
         <span className="bg-border h-24 w-0.5 max-lg:hidden"></span>
-        <motion.div
-          initial={reduced ? false : { opacity: 0, x: 20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 1, ease: EASE }}
-          className="max-lg:border-border flex flex-col gap-4 rounded-2xl max-lg:w-full max-lg:items-center max-lg:border max-lg:bg-white max-lg:p-6 lg:gap-2"
+        <Motions
+          duration={0.5}
+          ease="smooth"
+          x={20}
+          amount={0.3}
+          classMotion="max-lg:border-border flex flex-col gap-4 rounded-2xl max-lg:w-full max-lg:items-center max-lg:border max-lg:bg-white max-lg:p-6 lg:gap-2"
         >
           <span className="text-xl font-semibold">Apply Coupon</span>
           <div className="flex gap-2 max-lg:w-full max-lg:flex-wrap max-lg:items-center max-lg:justify-center">
@@ -48,7 +44,7 @@ const Payment = () => {
           <span className="text-[12px] text-gray-400">
             your coupon will be validated upon submission
           </span>
-        </motion.div>
+        </Motions>
       </div>
       <div className="my-12 flex justify-between max-lg:flex-col max-lg:gap-12">
         <Billing />

@@ -1,13 +1,11 @@
 import React from "react";
 import { Card3D, Card3DBody } from "../ui/card-3d";
-import { motion } from "motion/react";
-
 // Icons
 import Heart from "@/assets/icons/heart.svg";
 import Star from "@/assets/icons/star.svg";
 import Star1 from "@/assets/icons/star-1.svg";
 import Link from "next/link";
-import { useReducedMotion } from "framer-motion";
+import { Motions } from "../motions/Motions";
 
 type ProductBoxProps = {
   src?: string;
@@ -22,16 +20,8 @@ const ProductBox = ({
   price = "$200",
   rating = 4,
 }: ProductBoxProps) => {
-  const EASE = [0.22, 1, 0.36, 1] as const;
-  const reduced = useReducedMotion();
-
   return (
-    <motion.div
-      initial={reduced ? false : { opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration: 1, ease: EASE }}
-    >
+    <Motions y={20} duration={1} amount={0.3}>
       <span>
         <Card3D className="h-full w-full min-w-0 p-2 md:p-6">
           {/* group/card: برای اینکه عکس بفهمد موس روی پنل پایین است */}
@@ -96,7 +86,7 @@ const ProductBox = ({
           </Card3DBody>
         </Card3D>
       </span>
-    </motion.div>
+    </Motions>
   );
 };
 
